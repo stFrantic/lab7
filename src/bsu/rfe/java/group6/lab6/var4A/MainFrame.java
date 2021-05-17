@@ -107,7 +107,32 @@ public class MainFrame extends JFrame {
         });
 
         //
+        final ButtonGroup myButtons = new ButtonGroup();
 
+        JRadioButton radio1 = new JRadioButton ("Войти",true);
+        myButtons.add (radio1);
+        radio1.addActionListener(new ActionListener() {
+
+
+            public void actionPerformed(ActionEvent e) {
+                if(!turn){
+                    turn = true;
+                    textAreaIncoming.append("User Online" + "\n");
+                    buttonSend.setEnabled(true);}
+            }
+        });
+
+        JRadioButton radio2 = new JRadioButton ("Выйти",true);
+        myButtons.add (radio2);
+        radio2.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if(turn){
+                    turn = false;
+                    textAreaIncoming.append("User Offline" + "\n");
+                    buttonSend.setEnabled(false);}
+            }
+        });
         // Компоновка элементов панели "Сообщение"
         final GroupLayout layout2 = new GroupLayout(messagePanel);
         messagePanel.setLayout(layout2);
@@ -124,12 +149,12 @@ public class MainFrame extends JFrame {
                                 .addGap(SMALL_GAP)
                                 .addComponent(textFieldTo))
                         .addComponent(scrollPaneOutgoing)
-
+                        .addComponent(radio1)
+                        .addComponent(radio2)
                         .addComponent(buttonSend))
                 .addContainerGap());
         layout2.setVerticalGroup(layout2.createSequentialGroup()
                 .addContainerGap()
-
                 .addGroup(layout2.createParallelGroup(Alignment.BASELINE)
                         .addComponent(labelFrom)
                         .addComponent(textFieldFrom)
@@ -139,7 +164,8 @@ public class MainFrame extends JFrame {
                 .addComponent(scrollPaneOutgoing)
                 .addGap(MEDIUM_GAP)
                 .addComponent(buttonSend)
-
+                .addComponent(radio1)
+                .addComponent(radio2)
                 .addContainerGap());
 
         // Компоновка элементов фрейма
